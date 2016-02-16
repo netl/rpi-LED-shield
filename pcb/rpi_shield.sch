@@ -185,10 +185,10 @@ F0 "LED driver" 60
 F1 "led-driver.sch" 60
 F2 "SDA" B L 9150 2350 60 
 F3 "SCL" I L 9150 2450 60 
-F4 "DrainRed" I L 9150 1500 60 
-F5 "DrainGreen" I L 9150 1600 60 
-F6 "DrainBlue" I L 9150 1700 60 
-F7 "DrainFan" I L 9150 1800 60 
+F4 "DrainA" I L 9150 1500 60 
+F5 "DrainB" I L 9150 1600 60 
+F6 "DrainC" I L 9150 1700 60 
+F7 "DrainD" I L 9150 1800 60 
 $EndSheet
 Wire Wire Line
 	6950 2450 6800 2450
