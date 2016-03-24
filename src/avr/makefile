@@ -1,8 +1,7 @@
-all: clean compile program
-	avrdude -c linuxspi -P /dev/spidev0.0 -p t88 -F
+all: clean hex program
 
 program: main.hex
-	avrdude -c linuxspi -P /dev/spidev0.0 -p t88 -F
+	avrdude -c linuxspi -P /dev/spidev0.0 -p t88 -F -U main.hex
 
 hex: main.o
 	avr-objcopy -O ihex main.o main.hex

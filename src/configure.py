@@ -4,9 +4,9 @@ import smbus
 bus = smbus.SMBus(1)
 
 #setup
-current = [0.2,0.35,0.1,0.1] #led currents R,G,B,fan
+current = [0.3,0.3,0.3,0.1] #led currents R,G,B,fan
 shuntResistor = 0.43 #value of current shunt on board
-estimatedVoltage = 30 #voltage on supply
+estimatedVoltage = 12 #voltage on supply
 
 #set reference to 2.0V
 bus.write_i2c_block_data(0x1f,0x76,[0,0])
