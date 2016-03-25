@@ -11,7 +11,7 @@ B=PD2
 #include <stdlib.h>
 
 //sets the outputs by comparing variables to a running counter
-volatile uint8_t r=0,g=0,b=0;
+volatile uint8_t r,g,b,goalR,goalG,goalB;
 void pwm()
 {
    static uint8_t cnt = 0;
@@ -34,6 +34,26 @@ int main(void)
    while(1)
    {
       pwm();
+      static uint16_t cnt=0;
+      cnt++;
+      if(cnt>1000)
+      {
+         cnt=0;
+         if(r<goalR)
+            r++;
+         else if(r>goalR)
+            r--;
+
+         if(g<goalG)
+            g++;
+         else if(g>goalG)
+            g--;
+
+         if(b<goalB)
+            b++;
+         else if(b>goalB)
+            b--;
+      }
    }
 }
 
@@ -43,13 +63,13 @@ ISR(SPI_STC_vect)
    switch(cnt)
    {
       case 0:
-         r=SPDR;
+         goalR=SPDR;
          break;
       case 1:
-         g=SPDR;
+         goalG=SPDR;
          break;
       case 2:
-         b=SPDR;
+         goalB=SPDR;
          break;
    }
    if(cnt==2)
