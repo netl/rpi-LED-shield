@@ -1,10 +1,16 @@
 #! /usr/bin/python3
 import smbus
+import sys
+
+if len(sys.argv) != 5:
+   print("need 4 values, ex: 0.3 0.3 0.3 0.1")
+   sys.exit(0)
+
 
 bus = smbus.SMBus(1)
 
 #setup
-current = [0.3,0.3,0.3,0.1] #led currents R,G,B,fan
+current=[float(sys.argv[x]) for x in range(1,5)]
 shuntResistor = 0.43 #value of current shunt on board
 estimatedVoltage = 12 #voltage on supply
 
