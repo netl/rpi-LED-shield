@@ -1,5 +1,8 @@
 all: clean hex program
 
+reset:
+	avrdude -c linuxspi -P /dev/spidev0.0 -p t88 -F
+
 program: main.hex
 	avrdude -c linuxspi -P /dev/spidev0.0 -p t88 -F -U main.hex
 

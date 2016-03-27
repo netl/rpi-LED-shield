@@ -33,6 +33,9 @@ int main(void)
    sei();   //enable interrupts
    uint8_t i;
    uint32_t j;
+   r=0;
+   g=0;
+   b=0;
 
    while(1)
    {
