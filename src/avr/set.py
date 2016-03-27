@@ -2,17 +2,23 @@
 import spidev
 import sys
 
-if len(sys.argv) != 4:
-   print("need 3 values, ex: 255 255 255")
-   sys.exit(0)
+if len(sys.argv) != 3:
+   print("need 2 values, ex: <register> <value>")
+   sys.exit(1)
 
-bytes=[( int(sys.argv[1]) | int(sys.argv[2])<<3 | int(sys.argv[3])<<6)]
+#if(int(sys.argv[2])>0x3f):
+if(int(sys.argv[2])>100):
+   print("value too large")
+   sys.exit(2)
+
+reg={'r':0, 'g':1, 'b':2, 'm':3}
+data = [reg[sys.argv[1]]<<6|int(int(sys.argv[2])*0x3f/100)]
 
 spi = spidev.SpiDev()
 spi.open(0,0)
 spi.bits_per_word=8
 spi.max_speed_hz=100
-spi.xfer(bytes)
+spi.xfer(data)
 #for x in range(1,4):
-#   spi.xfer([int(sys.argv[x])])
+   #spi.xfer([int(sys.argv[x])])
 spi.close()
