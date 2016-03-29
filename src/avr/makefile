@@ -10,7 +10,7 @@ hex: main.o
 	avr-objcopy -O ihex main.o main.hex
 
 main.o:
-	avr-gcc -g -mmcu=attiny48 -o main.o main.c
+	avr-gcc -g -mmcu=attiny48 -o main.o main.c animations.c pwm.c
 
 clean:
 	rm *.hex *.o
