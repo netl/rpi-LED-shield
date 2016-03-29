@@ -12,7 +12,7 @@ B=PD2
 #include <avr/cpufunc.h>
 
 //sets the outputs by comparing variables to a running counter
-volatile uint8_t r=PWM_RESOLUTION/2,g=PWM_RESOLUTION/2,b=PWM_RESOLUTION/2;
+volatile uint8_t r=PWM_RESOLUTION,g=PWM_RESOLUTION,b=PWM_RESOLUTION;
 inline void pwm()
 {
    static uint8_t cnt = 0;
@@ -28,14 +28,8 @@ int main(void)
    //setup spi communication
    DDRB=(1<<4);
    SPCR = (1<<SPIE)|(1<<SPE);
-   SPDR = 42;
    
    sei();   //enable interrupts
-   uint8_t i;
-   uint32_t j;
-   r=0;
-   g=0;
-   b=0;
 
    while(1)
    {
@@ -45,11 +39,7 @@ int main(void)
 
 ISR(SPI_STC_vect)
 {
-   //r=SPDR&PWM_RESOLUTION;
-   //g=(SPDR>>3)&PWM_RESOLUTION;
-   //b=(SPDR>>6)&PWM_RESOLUTION;
    uint8_t mode=(SPDR>>6)&0x3;
-   static uint8_t cnt = 0;
    switch(mode)
    {
       case 0:
@@ -64,8 +54,4 @@ ISR(SPI_STC_vect)
       case 3:
          break;
    }
-   if(cnt==2)
-      cnt=0;
-   else
-      cnt++;
 }

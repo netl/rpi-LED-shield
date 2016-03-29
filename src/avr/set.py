@@ -19,6 +19,4 @@ spi.open(0,0)
 spi.bits_per_word=8
 spi.max_speed_hz=100
 spi.xfer(data)
-#for x in range(1,4):
-   #spi.xfer([int(sys.argv[x])])
 spi.close()
