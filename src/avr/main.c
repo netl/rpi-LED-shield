@@ -5,6 +5,8 @@ B=PD2
 */
 
 #define PWM_RESOLUTION 0x3f
+#define F_CPU 1000000
+#define ANIM_FRAMERATE 20
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -21,6 +23,11 @@ int main(void)
    //setup spi communication
    DDRB=(1<<4);
    SPCR = (1<<SPIE)|(1<<SPE);
+
+   //setup interrupts for animations
+   TCCR0A = (1<<CTC0)|(1<<CS00)|(1<<CS02);
+   TIMSK0 = (1<<OCIE0A);
+   OCR0A = F_CPU/1024/ANIM_FRAMERATE; //set interrupt interval
    
    sei();   //enable interrupts
 
@@ -28,6 +35,14 @@ int main(void)
    {
       pwm();
    }
+}
+
+volatile uint8_t anim = ANIM_NOANIM;
+ISR(TIMER0_COMPA_vect)
+{
+   if(anim != ANIM_NOANIM);
+      if(animate(anim, &PWMR, &PWMG, &PWMB) == ANIMATION_COMPLETE)
+         anim = ANIM_NOANIM;
 }
 
 ISR(SPI_STC_vect)
@@ -45,6 +60,7 @@ ISR(SPI_STC_vect)
          PWMB=SPDR&PWM_RESOLUTION;
          break;
       case 3:
+         anim=SPDR&PWM_RESOLUTION;
          break;
    }
 }

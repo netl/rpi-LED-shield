@@ -12,11 +12,14 @@ if(int(sys.argv[2])>100):
    sys.exit(2)
 
 reg={'r':0, 'g':1, 'b':2, 'm':3}
-data = [reg[sys.argv[1]]<<6|int(int(sys.argv[2])*0x3f/100)]
+if sys.argv[1] == 'm':
+   data = [reg[sys.argv[1]]<<6|int(sys.argv[2])]
+else:
+   data = [reg[sys.argv[1]]<<6|int(int(sys.argv[2])*0x3f/100)]
 
 spi = spidev.SpiDev()
 spi.open(0,0)
 spi.bits_per_word=8
-spi.max_speed_hz=100
+spi.max_speed_hz=10000
 spi.xfer(data)
 spi.close()
