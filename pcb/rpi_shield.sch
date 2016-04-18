@@ -268,9 +268,7 @@ $EndComp
 Text GLabel 8250 1300 3    60   Input ~ 0
 VCC
 Wire Wire Line
-	8250 1150 8250 1250
-Wire Wire Line
-	8250 1250 8250 1300
+	8250 1150 8250 1300
 Wire Wire Line
 	8150 1150 8150 1250
 Wire Wire Line
@@ -323,26 +321,12 @@ Wire Wire Line
 Text GLabel 3100 1150 0    60   Input ~ 0
 3v3
 Wire Wire Line
-	3100 1150 3300 1150
-Wire Wire Line
-	3300 1150 3450 1150
+	3100 1150 3450 1150
 Wire Wire Line
 	3450 1150 3450 1200
 Wire Wire Line
 	3300 1200 3300 1150
 Connection ~ 3300 1150
-$Sheet
-S 5600 2500 1300 1650
-U 570D51C9
-F0 "MicroController" 60
-F1 "mcu.sch" 60
-F2 "PWMA" O R 6900 2700 60 
-F3 "PWMB" O R 6900 2800 60 
-F4 "PWMC" O R 6900 2900 60 
-F5 "PWMD" O R 6900 3000 60 
-F6 "TX" O R 6900 3200 60 
-F7 "RX" I R 6900 3350 60 
-$EndSheet
 Wire Wire Line
 	6900 2700 9150 2700
 Wire Wire Line
@@ -383,10 +367,6 @@ Text Label 7250 3200 0    60   ~ 0
 TX
 Text Notes 7000 3550 0    60   ~ 0
 ~RPi
-Text HLabel 6900 3700 0    60   BiDi ~ 0
-SDA
-Text HLabel 6900 3800 0    60   BiDi ~ 0
-SCL
 Text Label 7000 3700 0    60   ~ 0
 SDA
 Wire Wire Line
@@ -401,14 +381,6 @@ Text Label 3450 1700 1    60   ~ 0
 SCL
 Wire Wire Line
 	9150 2450 8950 2450
-Text HLabel 5600 2650 2    60   Input ~ 0
-MISO
-Text HLabel 5600 2750 2    60   Output ~ 0
-MOSI
-Text HLabel 5600 2850 2    60   Output ~ 0
-SCK
-Text HLabel 5600 2950 2    60   Output ~ 0
-RESET
 Text Label 1300 2100 0    60   ~ 0
 MOSI
 Text Label 1300 2200 0    60   ~ 0
@@ -433,4 +405,22 @@ Text Label 5300 2650 0    60   ~ 0
 MISO
 Text Label 5300 2850 0    60   ~ 0
 SCK
+$Sheet
+S 5600 2500 1300 1650
+U 570D51C9
+F0 "MicroController" 60
+F1 "mcu.sch" 60
+F2 "PWMA" O R 6900 2700 60 
+F3 "PWMB" O R 6900 2800 60 
+F4 "PWMC" O R 6900 2900 60 
+F5 "PWMD" O R 6900 3000 60 
+F6 "TX" O R 6900 3200 60 
+F7 "RX" I R 6900 3350 60 
+F8 "~RESET" I L 5600 2950 60 
+F9 "MISO" O L 5600 2650 60 
+F10 "MOSI" I L 5600 2750 60 
+F11 "SCK" I L 5600 2850 60 
+F12 "SDA" O R 6900 3700 60 
+F13 "SCL" O R 6900 3800 60 
+$EndSheet
 $EndSCHEMATC
