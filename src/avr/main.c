@@ -14,9 +14,13 @@ B=PD2
 #include <avr/cpufunc.h>
 #include "pwm.h"
 #include "animations.h"
+#include "debug.h"
 
 int main(void)
 {
+   //setup debug
+   debugSetup();
+
    //setup pwm
    pwmSetup();
 
@@ -25,7 +29,8 @@ int main(void)
    SPCR = (1<<SPIE)|(1<<SPE);
 
    //setup interrupts for animations
-   TCCR0A = (1<<CTC0)|(1<<CS00)|(1<<CS02);
+   TCCR0A = (1<<WGM01);
+   TCCR0B = (1<<CS00)|(1<<CS02);
    TIMSK0 = (1<<OCIE0A);
    OCR0A = F_CPU/1024/ANIM_FRAMERATE; //set interrupt interval
    
@@ -34,13 +39,17 @@ int main(void)
    while(1)
    {
       pwm();
+      if(!DBUTTON)
+         DLED_ON
+      else
+         DLED_OFF
    }
 }
 
 volatile uint8_t anim = ANIM_NOANIM;
 ISR(TIMER0_COMPA_vect)
 {
-   if(anim != ANIM_NOANIM);
+   if(anim != ANIM_NOANIM)
       if(animate(anim, &PWMR, &PWMG, &PWMB) == ANIMATION_COMPLETE)
          anim = ANIM_NOANIM;
 }
