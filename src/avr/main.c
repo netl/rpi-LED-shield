@@ -50,7 +50,7 @@ volatile uint8_t anim = ANIM_NOANIM;
 ISR(TIMER0_COMPA_vect)
 {
    if(anim != ANIM_NOANIM)
-      if(animate(anim, &PWMR, &PWMG, &PWMB) == ANIMATION_COMPLETE)
+      if(animate(anim, &PWMA, &PWMB, &PWMC) == ANIMATION_COMPLETE)
          anim = ANIM_NOANIM;
 }
 
@@ -60,13 +60,13 @@ ISR(SPI_STC_vect)
    switch(mode)
    {
       case 0:
-         PWMR=SPDR&PWM_RESOLUTION;
+         PWMA=SPDR&PWM_RESOLUTION;
          break;
       case 1:
-         PWMG=SPDR&PWM_RESOLUTION;
+         PWMB=SPDR&PWM_RESOLUTION;
          break;
       case 2:
-         PWMB=SPDR&PWM_RESOLUTION;
+         PWMC=SPDR&PWM_RESOLUTION;
          break;
       case 3:
          anim=SPDR&PWM_RESOLUTION;
