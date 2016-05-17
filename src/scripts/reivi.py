@@ -8,14 +8,14 @@ import os
 spi = spidev.SpiDev()
 spi.open(0,0)
 spi.bits_per_word=8
-spi.max_speed_hz=10000
+spi.max_speed_hz=1000
 Range=0x3f
 colors=["r","g","b"]
 data=[0,0,0]
 lastColorUpdate=time.time()
 lastFrameUpdate=time.time()
 colorRate=2
-frameRate=0.01
+frameRate=0.03
 
 while True:
    try:
