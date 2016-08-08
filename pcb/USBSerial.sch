@@ -28,7 +28,6 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:netl
 LIBS:rpi_shield-cache
 EELAYER 25 0
 EELAYER END
