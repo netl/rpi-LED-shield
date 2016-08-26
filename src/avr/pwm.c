@@ -9,7 +9,7 @@ inline void pwm()
 {
    static uint8_t cnt = 0;
    cnt = (cnt+1)&PWM_RESOLUTION;
-   PWM_PORT = ((PWMA<cnt)<<PWM_N_A)|((PWMB<cnt)<<PWM_N_B)|((PWMC<cnt)<<PWM_N_C)|((PWMD<cnt)<<PWM_N_D);
+   PWM_PORT = ((PWMA<=cnt)<<PWM_N_A)|((PWMB<=cnt)<<PWM_N_B)|((PWMC<=cnt)<<PWM_N_C)|((PWMD<=cnt)<<PWM_N_D);
 }
 
 void pwmSetup(void)

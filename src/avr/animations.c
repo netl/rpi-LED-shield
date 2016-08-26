@@ -19,6 +19,10 @@ uint8_t animate(uint8_t anim, volatile uint8_t *r, volatile uint8_t *g, volatile
          if(anim_fadeOut(r, g, b))
             return ANIMATION_COMPLETE;
          break;
+      case(ANIM_DIMM):
+         if(anim_dimm(r, g, b))
+            return ANIMATION_COMPLETE;
+         break;
    }
 }
 
@@ -63,6 +67,35 @@ inline uint8_t anim_fadeOut(volatile uint8_t *r, volatile uint8_t *g, volatile u
          *g -=1;
       if(*b>0)
          *b -=1;
+      return 0;
+   }
+}
+
+inline uint8_t anim_dimm(volatile uint8_t *r, volatile uint8_t *g, volatile uint8_t *b)
+{
+   static uint8_t oR,oG,oB;
+   if (oR<*r | oG<*g | oB<*b) 
+   {
+      oR = *r;
+      oG = *g;
+      oB = *b;
+   }
+
+   if(*r <= oR/3 && *g <= oG/3 && *b <= oB/3)
+   {
+      oR = 0;
+      oG = 0;
+      oB = 0;
+      return ANIMATION_COMPLETE;
+   }
+   else
+   {
+      if(*r > oR/3)
+         *r -= 1;
+      if(*g > oG/3)
+         *g -= 1;
+      if(*b > oB/3)
+         *b -= 1;
       return 0;
    }
 }

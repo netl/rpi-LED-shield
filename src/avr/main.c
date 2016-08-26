@@ -1,9 +1,3 @@
-/*
-R=PD0
-G=PD1
-B=PD2
-*/
-
 #define PWM_RESOLUTION 0x3f
 #define F_CPU 1000000
 #define ANIM_FRAMERATE 20
