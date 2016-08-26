@@ -1,4 +1,4 @@
-update=ti 12. huhtikuuta 2016 15.13.57
+update=Sun 17 Jul 2016 02:19:44 PM EEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -27,7 +27,7 @@ NetIExt=net
 version=1
 [eeschema]
 version=1
-LibDir=/home/netl/kicad_sources/library-repos
+LibDir=../../kicadLib/netl.pretty
 [eeschema/libraries]
 LibName1=rpi_shield-rescue
 LibName2=power
